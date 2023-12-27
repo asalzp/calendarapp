@@ -55,7 +55,7 @@ MIDDLEWARE = [
 
 REST_FRAMEWORK = {'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny']}
 
-OPENAI_API_KEY = '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'
+OPENAI_API_KEY = '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'
 
 CORS_ORIGIN_ALLOW_ALL = True
 
