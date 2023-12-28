@@ -54,7 +54,7 @@ def create_event(event_content):
         primary_calendar_id = calendars['items'][0]['id']
         calendar_info = service.calendars().get(calendarId=primary_calendar_id).execute()
         timezone = calendar_info['timeZone']
-        print(calendars)
+        # print(calendars)
         
         event_content['start']['timeZone'] = timezone
         event_content['end']['timeZone'] = timezone

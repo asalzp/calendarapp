@@ -15,13 +15,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from app.views import *
 # from .googleCalendar import createEvent
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', ReactView.as_view(), name="main page"),
+    # path('', ReactView.as_view(), name="main page"),
     path('create-event/<str:input_data>/', handle_user_input),
     path('get-credentials/', integrate_google_calendar),
+    re_path(r'^', FrontendAppView.as_view())
 ]

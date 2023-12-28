@@ -1,15 +1,14 @@
 import openai
 from datetime import datetime
 import uuid
+import os
 
-from project.settings import OPENAI_API_KEY
 
 
-API_KEY = OPENAI_API_KEY
-
+openai_api_key = os.environ.get('OPENAI_API_KEY')
 
 def generate_openai_prompt(user_input):
-    openai.api_key = API_KEY
+    openai.api_key = openai_api_key
     current_datetime = datetime.now()
     unique_id = str(uuid.uuid4())
 
@@ -17,12 +16,12 @@ def generate_openai_prompt(user_input):
     {"role": "system", "content": "You are a helpful assistant."},
 {
   "role": "user",
-  "content": f"Build a Google Calendar event with a meeting link (in dictionary format) with the following details:\
+  "content": f"Build a Google Calendar event with a meeting link (in dictionary format) with the following details and provide the object only without additional explanation:\
     \n\n{user_input}\n\n The fields I need in this dictionary are: summary, location, description, colorId, start, end,\
     recurrence, and conferenceData. Here are the rules to follow:\n\n\
     1. Origin datetime is {current_datetime}, so if the user asks to set an event in the future but does not specify any \
     date or time, calculate the date and time based on {current_datetime}.\n\
-    2. If the user provides the day in this format:mon, tue, wed, thu, fri, sat, sun, and doesn't specify a date, set the\
+    2. If the user provides the day in this format:mon=Monday, tue=Tuesday, wed=Wednesday, thu=Thursday, fri=Friday, sat=Saturday, sun=Sunday, and doesn't specify a date, set the\
     date to the first upcoming date on that day. If the user's requested day matches {current_datetime.day}, create the event\
     for next week on that day from {current_datetime.date} and not on {current_datetime.day}.\n\
     3. If the user only provides the date and not the time, set the default time to 10am on that date.\n\
@@ -36,7 +35,14 @@ def generate_openai_prompt(user_input):
     end timeZone: America/Vancouver\nrecurrence: once, daily\nrequestId for the conference: {unique_id}\n\
     conferenceSolutionKey type: hangoutsMeet.\n8. Enclose the key-value pairs in double quotes.\n\
     9. Keep the event object the same length with the same keys to prevent syntax errors.\n\
-    10. Please make sure to follow all these rules."
+    10. Please make sure to follow all these rules.\
+    Here are some example prompts with the outputs expected from you:\
+        Can we do the 28th at 2pm? create an event for the upcoming 28th at 2pm.\
+        I want to talk tue 14:00. create an event for the upcoming Tuesday in the future at 14:00.\
+        Let's do the 27th. (no time given). Create an event for the 27th at 10am.\
+        No, I can't do fri at 3pm. How about next tuesday at 2pm? create an event for next Tuesdat at 2pm.\
+        Does Fri in 2 weeks at 10am work for you? create an event on Friday in two weeks at 10am.\
+        Can we revisit this in 2 weeks? (set a reminder to revisit, instead of call). don't create any meeting link or info, just a reminder."
 }
 
 ]
@@ -52,7 +58,7 @@ def generate_openai_prompt(user_input):
     end_index = response_content.find("}\n}")
     event_content = response_content[start_index:end_index+4]
     event = eval(event_content)
-    print(event)
+    print(response_content)
     return event
 
 # # Get user input
