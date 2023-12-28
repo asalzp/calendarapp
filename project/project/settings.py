@@ -135,8 +135,13 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-REACT_APP_DIR = os.path.join(BASE_DIR_FRONT, 'frontend') 
+# REACT_APP_DIR = os.path.join(BASE_DIR_FRONT, 'frontend') 
+# STATICFILES_DIRS = [
+#     os.path.join(REACT_APP_DIR, 'build', 'static'),
+# ]
+
 STATICFILES_DIRS = [
-    os.path.join(REACT_APP_DIR, 'build', 'static'),
+    os.path.join(BASE_DIR, 'build\static')
 ]
+
 django_heroku.settings(locals())

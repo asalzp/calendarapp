@@ -1,0 +1,44 @@
+.input, .header, .button-div, .alert{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header{
+    margin-top: -20%;
+    color: white;
+}
+
+.input{
+    margin-top: 5rem;
+    background-color: white;
+    border-radius: 8px;
+}
+.button-post{
+    margin-top: 1rem;
+    background-color: rgb(85, 17, 88) !important;
+    border-color: rgb(85, 17, 88) !important;
+    color: white !important;
+}
+
+
+.button-post:hover{
+    background-color: rgb(151, 91, 155) !important;
+    border-color: rgb(151, 91, 155) !important;
+}
+.button-post:active{
+    background-color: rgb(63, 1, 65) !important;
+    color: #fff !important;
+  }
+
+.alert{
+    background-color: rgb(201, 109, 109);
+    border-color: rgb(88, 9, 9);
+    color: rgb(51, 2, 2);
+    
+
+}
+
+p{
+    margin-top: 1rem;
+}

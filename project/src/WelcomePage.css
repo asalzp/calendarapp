@@ -1,0 +1,31 @@
+.header, .button-div, p{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.header{
+    margin-top: -20%;
+    color: white;
+}
+
+p{
+    color: white;
+    margin-bottom: 3rem;
+    font-size: large;
+}
+
+.button-api{
+    background-color: rgb(85, 17, 88) !important;
+    border-color: rgb(85, 17, 88) !important;
+    color: white !important;
+}
+
+.button-api:hover{
+    background-color: rgb(151, 91, 155) !important;
+    border-color: rgb(151, 91, 155) !important;
+}
+.button-api:active{
+    background-color: rgb(63, 1, 65) !important; 
+    color: #fff !important; 
+  }
